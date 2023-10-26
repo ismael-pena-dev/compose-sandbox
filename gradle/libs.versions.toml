@@ -49,6 +49,7 @@
     ui = { group = "androidx.compose.ui", name = "ui" }
     ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
     material3 = { group = "androidx.compose.material3", name = "material3" }
+    window-size = { group = "androidx.compose.material3", name = "material3-window-size-class"}
     ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
     ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 

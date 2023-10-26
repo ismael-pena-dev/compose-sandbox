@@ -2,6 +2,7 @@ package com.pena.ismael.timeline.pokemon.screens
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -15,7 +16,10 @@ import com.pena.ismael.timeline.pokemon.screens.pokemondetail.PokemonDetailScree
 import com.pena.ismael.timeline.pokemon.screens.pokemonlist.PokemonListScreen
 
 @Composable
-fun PokemonNavHost(navController: NavHostController) {
+fun PokemonNavHost(
+    navController: NavHostController,
+    windowSizeClass: WindowSizeClass
+) {
     val animationSpeed by remember {
         mutableIntStateOf(700)
     }
@@ -52,6 +56,7 @@ fun PokemonNavHost(navController: NavHostController) {
         ) {
             PokemonListScreen(
                 navController = navController,
+                windowSizeClass = windowSizeClass
             )
         }
         composable(route = "pokemon/{id}",
@@ -84,7 +89,8 @@ fun PokemonNavHost(navController: NavHostController) {
             },
         ) {
             PokemonDetailScreen(
-                navController = navController
+                navController = navController,
+                windowSizeClass = windowSizeClass
             )
         }
     }

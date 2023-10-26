@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+
 package com.pena.ismael.timeline.pokemon.screens.pokemondetail
 
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,11 +35,23 @@ import com.pena.ismael.timeline.pokemon.screens.pokemondetail.component.StatSect
 @Composable
 fun PokemonDetailScreen(
     navController: NavHostController,
-    viewModel: PokemonDetailViewModel = hiltViewModel()
+    viewModel: PokemonDetailViewModel = hiltViewModel(),
+    windowSizeClass: WindowSizeClass
 ) {
     val pokemonState = viewModel.pokemon.collectAsStateWithLifecycle()
+    when (windowSizeClass.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> {
+            PortraitView(pokemon = pokemonState.value)
+        }
+        WindowWidthSizeClass.Medium -> {
+            LandscapeView(pokemon = pokemonState.value)
+        }
+        WindowWidthSizeClass.Expanded -> {
+            LandscapeView(pokemon = pokemonState.value)
+        }
+    }
     BoxWithConstraints(Modifier.fillMaxSize()) {
-        if (maxWidth < 500.dp) {
+        if (maxWidth < 600.dp) {
             PortraitView(pokemonState.value)
         } else {
             LandscapeView(pokemon = pokemonState.value)
@@ -47,7 +65,9 @@ fun PortraitView(pokemon: Pokemon?) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxSize().padding(horizontal = 32.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 32.dp)
     ) {
         DetailHeader(pokemon = pokemon)
         Spacer(modifier = Modifier.height(16.dp))
@@ -57,7 +77,10 @@ fun PortraitView(pokemon: Pokemon?) {
 
 @Composable
 fun LandscapeView(pokemon: Pokemon?) {
-    Row(Modifier.fillMaxSize().padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+    Row(
+        Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
         DetailHeader(pokemon = pokemon)
         StatSection(pokemon = pokemon)
     }
