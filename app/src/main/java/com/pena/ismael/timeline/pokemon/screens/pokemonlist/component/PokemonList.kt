@@ -2,6 +2,7 @@ package com.pena.ismael.timeline.pokemon.screens.pokemonlist.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -25,35 +26,15 @@ import com.pena.ismael.timeline.pokemon.model.Pokemon
 @Composable
 fun PokemonList(
     pokemonList: List<Pokemon>,
-    onPokemonClick: (pokemon: Pokemon) -> Unit,
-    onFetchMore: () -> Unit,
-    onClearCache: () -> Unit
-) {
-    PokemonListRaw(
-        pokemonList = pokemonList,
-        onFetchMore = onFetchMore,
-        onClearCache = onClearCache,
-        pokemonListItemComposable = { pokemonListItem ->
-            PokemonListItem(
-                pokemonListItem = pokemonListItem,
-                onClick = {
-                    onPokemonClick(pokemonListItem)
-                }
-            )
-        }
-    )
-}
-
-@Composable
-fun <T> PokemonListRaw(
-    pokemonList: List<T>,
-    onFetchMore: () -> Unit,
-    onClearCache: () -> Unit,
-    pokemonListItemComposable: @Composable (pokemonListItem: T) -> Unit,
+    onPokemonClick: (pokemon: Pokemon) -> Unit = {},
+    onFetchMore: () -> Unit = {},
+    onClearCache: () -> Unit = {},
 ) {
     LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 128.dp)) {
         items(pokemonList) { pokemonListItem ->
-            pokemonListItemComposable(pokemonListItem)
+            PokemonListItem(pokemonListItem = pokemonListItem, onClick = {
+                onPokemonClick(pokemonListItem)
+            })
         }
         item(span = { GridItemSpan(maxCurrentLineSpan) }) {
             Spacer(modifier = Modifier.height(1.dp))
@@ -71,24 +52,14 @@ fun <T> PokemonListRaw(
     }
 }
 
-@DarkLightPreviewUI()
-@Preview(device = Devices.TABLET, showBackground = true, showSystemUi = true)
+@DarkLightPreviewUI
 @Composable
-fun PreviewPokemonLis() {
+fun PreviewPokemonList() {
     DarkLightThemeSurface {
-        val pokemonList = mutableListOf<String>()
+        val pokemonList = mutableListOf<Pokemon>()
         repeat(10) {
-            pokemonList.add("Pidgeotto")
+            pokemonList.add(Pokemon(id = (1..100).random(), name = "Pidgeotto"))
         }
-        PokemonListRaw(
-            pokemonList = pokemonList,
-            onFetchMore = { },
-            onClearCache = { },
-            pokemonListItemComposable = { pokemon ->
-                PokemonListItemRaw(pokemonName = pokemon, image = { modifier ->
-                    Image(painterResource(id = R.drawable.pidgeotto), contentDescription = pokemon, modifier = modifier)
-                })
-            }
-        )
+        PokemonList(pokemonList = pokemonList)
     }
 }

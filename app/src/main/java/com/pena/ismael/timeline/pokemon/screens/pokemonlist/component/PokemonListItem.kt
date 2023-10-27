@@ -27,21 +27,11 @@ import com.pena.ismael.timeline.pokemon.model.Pokemon
 @Composable
 fun PokemonListItem(
     pokemonListItem: Pokemon,
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
     PokemonListItemRaw(
         pokemonName = pokemonListItem.name,
-        image = { modifier ->
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonListItem.id}.png")
-                    .crossfade(true)
-                    .build(),
-                contentDescription = pokemonListItem.name,
-                contentScale = ContentScale.Fit,
-                modifier = modifier
-            )
-        },
+        imageUrl = pokemonListItem.imageUrl,
         onClick = {
             onClick()
         }
@@ -51,7 +41,7 @@ fun PokemonListItem(
 @Composable
 fun PokemonListItemRaw(
     pokemonName: String,
-    image: @Composable (modifier: Modifier) -> Unit,
+    imageUrl: String,
     onClick: () -> Unit = {}
 ) {
     Box(
@@ -71,7 +61,16 @@ fun PokemonListItemRaw(
                 .size(128.dp)
                 .align(Alignment.BottomCenter)
         }
-        image.invoke(modifier)
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl)
+                .placeholder(R.drawable.pidgeotto)
+                .crossfade(true)
+                .build(),
+            contentDescription = pokemonName,
+            contentScale = ContentScale.Fit,
+            modifier = modifier
+        )
         Text(
             text = pokemonName,
             Modifier.align(Alignment.BottomCenter)
@@ -83,10 +82,8 @@ fun PokemonListItemRaw(
 @Composable
 fun PreviewPokemonListItem() {
     DarkLightThemeSurface {
-        val pokemonName = "Pidgeotto"
-        PokemonListItemRaw(pokemonName = pokemonName, image = { modifier ->
-            Image(painterResource(id = R.drawable.pidgeotto), contentDescription = pokemonName, modifier = modifier)
-        })
+        val pokemon = Pokemon(id = 17, name = "Pidgeotto")
+        PokemonListItem(pokemonListItem = pokemon)
     }
 }
 

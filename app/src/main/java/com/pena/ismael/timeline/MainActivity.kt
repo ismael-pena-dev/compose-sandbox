@@ -27,7 +27,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PokemonNavHost(navController = navController, windowSizeClass = windowSizeClass)
+                    PokemonNavHost(
+                        navController = navController,
+                        widthSizeClass = windowSizeClass.widthSizeClass,
+                        heightSizeClass = windowSizeClass.heightSizeClass,
+                    )
                 }
             }
         }
