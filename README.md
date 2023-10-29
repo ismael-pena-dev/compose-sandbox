@@ -1,14 +1,14 @@
 # Pokedex Compose
 
 ### List + Detail Views
-![List View](/readme/List.png)
-![Detail View](/readme/Detail.png)
+![List View](/readme/List.png | height=500)
+![Detail View](/readme/Detail.png | height=500)
 
 ### Tablet (adaptive layouts)
 ![Tablet View](/readme/Tablet.png)
 
 ### Light + Dark Theme
-![Light theme view](/readme/LightTheme.png)
+![Light theme view](/readme/LightTheme.png | height=500)
 
 ### Sandbox project to showcase:
 * Jetpack Compose
