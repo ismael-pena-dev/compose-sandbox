@@ -1,6 +1,16 @@
 # Pokedex Compose
 
-Sandbox project to showcase:
+### List + Detail Views
+![List View](/readme/List.png)
+![Detail View](/readme/Detail.png)
+
+### Tablet (adaptive layouts)
+![Tablet View](/readme/Tablet.png)
+
+### Light + Dark Theme
+![Light theme view](/readme/LightTheme.png)
+
+### Sandbox project to showcase:
 * Jetpack Compose
 * Model VIew ViewModel (MVVM) Architecture
 * Compose Navigation Library

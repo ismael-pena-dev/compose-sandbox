@@ -76,9 +76,11 @@ fun PokemonDetailScreenRaw(
         when (type) {
             PokemonContentType.LIST_ONLY -> {
                 BoxWithConstraints(
-                    Modifier
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
                         .fillMaxSize()
-                        .padding(vertical = 32.dp)) {
+                        .padding(vertical = 32.dp)
+                ) {
                     if (maxWidth < 600.dp) {
                         PortraitView(pokemon = pokemon)
                     } else {
@@ -101,7 +103,7 @@ fun PortraitView(pokemon: Pokemon?) {
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 32.dp)
+            .padding(horizontal = 32.dp, vertical = 32.dp)
     ) {
         DetailHeader(pokemon = pokemon)
         Spacer(modifier = Modifier.height(16.dp))
