@@ -1,7 +1,7 @@
 # Pokedex Compose
 
 ### List + Detail Views
-![List View](/readme/List.png | height=500)
+<img src="/readme/List.png" height="500">
 ![Detail View](/readme/Detail.png | height=500)
 
 ### Tablet (adaptive layouts)
