@@ -14,17 +14,20 @@
 * Jetpack Compose
 * Model VIew ViewModel (MVVM) Architecture
 * Compose Navigation Library
+* Compose animations
 * Custom Compose Preview Annotations
 * Adaptive Layouts (Phone + Tablet + Foldables)
 * Hilt Dependency Injection
 * Retrofit for connecting with Pokemon API
 * Room Database for local data caching
 * Coil for image loading + image caching
+* KSP for annotation processing
 * Light + Dark theme
 * Coroutines
 * Kotlin Flows
 * Graceful configuration change handling
 * SOLID principles
+* Gradle Library Version Catalog
 
 #### Architecture Details
 ![Diagram that shows architecture for Pokedex project](/readme/PokedexDiagram.jpg)
